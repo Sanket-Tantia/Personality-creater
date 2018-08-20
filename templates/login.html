@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>God Eye</title>
+</head>
+<body>
+<link rel="stylesheet" href="{{url_for('static',filename='css/reset.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}"/>
+<div class="footer1">
+    <h1 style="margin-left: 35px;">
+        <center>God Eye</center>
+    </h1>
+</div>
+<div class="wrap">
+    <div class="avatar">
+        <img src="../static/assests/user.png">
+    </div>
+    <input type="text" placeholder="username" required>
+    <div class="bar">
+        <i></i>
+    </div>
+    <input type="password" placeholder="password" required>
+    <form action="/dashboard">
+        <input type="Submit" value="Sign in"/>
+    </form>
+    <div class="footer">
+        <h3 style="margin-top: 5px;opacity: 0.9;font-family:Lato ;">
+            <center>Copy right content<br>Contact team Divide By Zero</center>
+
+        </h3>
+    </div>
+</div>
+
+</body>
+</html>

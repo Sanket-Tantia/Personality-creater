@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>God Eye</title>
+    <style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+}
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+    </style>
+</head>
+
+<script src="../static/js/wordcloud2.js"></script>
+<link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static',filename='css/demo.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static',filename='css/component.css')}}"/>
+<script src="../static/js/modernizr.custom.js"></script>
+<div class="container">
+    <ul id="gn-menu" class="gn-menu-main">
+        <li class="gn-trigger">
+            <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+            <nav class="gn-menu-wrapper">
+                <div class="gn-scroller">
+                    <ul id="features" class="gn-menu">
+                        <li><a class="gn-icon gn-icon-download">Skill Mapping</a></li>
+                        <li><a class="gn-icon gn-icon-cog">Word Cloud</a></li>
+                        <li><a class="gn-icon gn-icon-help">Week's Hottest Searches</a></li>
+                    </ul>
+                </div><!-- /gn-scroller -->
+            </nav>
+        </li>
+        <li>
+            <center><span>God Eye</span></center>
+        </li>
+        <li><a href="/"><span>Logout</span></a></li>
+    </ul>
+    <div style="color:white;height:650pt;width:auto;text-align:center;vertical-align:middle;padding-top:200px;">
+        <header>
+            <h1 id="getElement">DashBoard</h1>
+
+            <!--<img src="../static/assests/user.png">-->
+            <div class="text-center" id="canvas_id" style="display:none;">
+                <canvas id="my_canvas" width="800" height="400"></canvas>
+            </div>
+            <div id="hidd" class="wrap" style="display:none">
+                <input type="text" id="huri" placeholder="Enter the Skills to be Filtered"
+                       style="width:450px;vertical-align:middle;margin-left:33%;padding:20px;margin-top:0">
+                <button id="doc" style="padding:10px;margin:10px;background-color:#4CAF50">Filter Results</button>
+            </div>
+            <Center>
+                <table id="customers"
+                       style="width=40%;vertical-align:middle;margin-left:13%;padding:50px;display:none;">
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Frequency</th>
+                    </tr>
+                </table>
+            </Center>
+        </header>
+    </div>
+</div>
+<div class="footer">
+    <h3 style="margin-top:5px;opacity: 0.9;font-height:6pt;font-width:10pt;font-family:Lato ;">
+        <center>Copy right content<br>Contact team Divide By Zero</center>
+    </h3>
+</div>
+<script src="../static/js/classie.js"></script>
+<script src="../static/js/gnmenu.js"></script>
+<script>
+    new gnMenu( document.getElementById( 'gn-menu' ) );
+</script>
+<script>
+var ul = document.getElementById('features');
+ul.onclick = function(event) {
+
+    var target = event.target;
+    document.getElementById('getElement').innerHTML = target.innerHTML;
+    if(target.innerHTML == 'Skill Mapping'){
+    document.getElementById('canvas_id').style.display = "none";
+    document.getElementById('hidd').style.display = "block";
+    document.getElementById('customers').style.display = "block";
+    var parsed = {{hell|tojson}}
+    console.log(parsed['javascript'])
+    var u3 = document.getElementById('doc');
+    u3.onclick = function(event) {
+        var search_key = document.getElementById('huri').value;
+        //search_key = 'python'
+        console.log(parsed[search_key])
+        var table = document.getElementById("customers");
+        mymuy = table.rows.length
+        for(var j=0;j<mymuy-1;j++){
+            console.log("Huri")
+            table.deleteRow(1);
+        }
+    if (table.rows.length<2){
+        for(var k=0;k<parsed[search_key].length;k++){
+            console.log(parsed[search_key][k]);
+
+        for(key in parsed[search_key][k]){
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = key;
+        cell2.innerHTML = parsed[search_key][k][key];
+        }
+
+        }
+    /*if (search_key=='javascript'){
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "Suruchi";
+        cell2.innerHTML = "3";
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "Rohan";
+        cell2.innerHTML = "7";
+        }
+     if (search_key=='odi'){
+    var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "Mehak";
+        cell2.innerHTML = "4";
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "Manasvi";
+        cell2.innerHTML = "2";
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "Suruchi";
+        cell2.innerHTML = "6";
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "Garima";
+        cell2.innerHTML = "8";
+        }*/
+    }
+    }
+
+
+    }
+    if(target.innerHTML == 'Word Cloud'){
+    document.getElementById('customers').style.display = "none";
+    document.getElementById('hidd').style.display = "none";
+    document.getElementById('canvas_id').style.display = "block";
+        var wordArray = {{ ans|tojson }};
+        wordCloudJson = {'list':wordArray};
+        console.log(wordCloudJson);
+        WordCloud(document.getElementById('my_canvas'),wordCloudJson);
+    }
+
+   if(target.innerHTML == "Week's Hottest Searches"){
+   document.getElementById('customers').style.display = "none";
+   document.getElementById('hidd').style.display = "none";
+   document.getElementById('canvas_id').style.display = "block";
+        var wordArray = {{ ans|tojson }};
+        wordCloudJson = {'list':wordArray};
+        console.log(wordCloudJson);
+        WordCloud(document.getElementById('my_canvas'),{list:[['odi',55],['oracle',40],['regular expression',10],
+['oracle Peaople soft',5],['hackathon',45],['obiee',20],['ssis',50],['sql server',34],['Java',20],
+['MSBI',30],['tutorial',57],['trasformations',34],['mappings',32],
+['interfaces',22],['trim',18],['installing',33],['TEKathon',10],['blockchain',33],
+['GitHub',28],['machine learning',20],['go lang',30],['templates',30],['anroid',20],
+['My SQL',18],['constraints',19],['HTML',30]]});
+    }
+};
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
